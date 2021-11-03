@@ -1,1 +1,1 @@
-web: python app.py
+web: gunicorn outreach-rms.wsgi:application
