@@ -1,1 +1,1 @@
-web: gunicorn outreach-rms.wsgi:application
+web: gunicorn outreach-rms.wsgi
