@@ -26,7 +26,9 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 DEBUG = os.environ['DEBUG']
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'outreach-rms.herokuapp.com'
+]
 
 
 # Application definition
