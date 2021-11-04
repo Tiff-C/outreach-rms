@@ -7,5 +7,24 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Test</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Add a new School</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form method="POST" action="add_school" class="align-items-center">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div>
+                        <p>
+                            <button type="submit" class="btn teal-bg">Add School</button>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

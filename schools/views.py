@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import School, Event
 from .forms import Add_school, Add_event
 # Create your views here.
@@ -25,7 +25,7 @@ def add_school(request):
         if form.is_valid():
             form.save()
 
-            return redirect('all_schools')
+            return redirect('schools')
     form = Add_school()
     context = {
         'form': form
