@@ -31,3 +31,17 @@ def add_school(request):
         'form': form
     }
     return render(request, 'schools/add_school.html', context)
+
+
+def add_event(request):
+    if request.method == 'POST':
+        form = Add_event(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return redirect('events')
+    form = Add_event()
+    context = {
+        'form': form
+    }
+    return render(request, 'schools/add_event.html', context)
