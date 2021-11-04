@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
-import django_heroku
 import mimetypes
+import django_heroku
 if os.path.exists("env.py"):
     import env  # noqa
 
