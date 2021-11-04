@@ -17,3 +17,17 @@ def all_events(request):
         'events': events
     }
     return render(request, 'schools/events.html', context)
+
+
+def add_school(request):
+    if request.method == 'POST':
+        form = Add_school(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return redirect('all_schools')
+    form = Add_school()
+    context = {
+        'form': form
+    }
+    return render(request, 'schools/add_school.html', context)
