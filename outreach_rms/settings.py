@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 import django_heroku
+import mimetypes
 if os.path.exists("env.py"):
     import env  # noqa
 
@@ -167,3 +168,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # required for django-heroku
 django_heroku.settings(locals())
+
+# Added to resolve mimetype error for CSS files on deployed project
+mimetypes.add_type("text/css", ".css", True)
