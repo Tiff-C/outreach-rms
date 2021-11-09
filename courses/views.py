@@ -1,3 +1,4 @@
+""" Import required modules for use in courses app views """
 from django.shortcuts import render, redirect
 from .models import Courses
 from .forms import Add_course
@@ -5,6 +6,7 @@ from .forms import Add_course
 
 
 def all_courses(request):
+    """ A view to show all courses """
     courses = Courses.objects.all()
     context = {
         'courses': courses
@@ -13,6 +15,7 @@ def all_courses(request):
 
 
 def add_course(request):
+    """ A view to add a new course """
     if request.method == 'POST':
         form = Add_course(request.POST)
         if form.is_valid():
