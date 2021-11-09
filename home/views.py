@@ -1,4 +1,4 @@
-""" Import required modules for home app views """
+""" Imports for home app views """
 from django.shortcuts import render
 
 # Create your views here.

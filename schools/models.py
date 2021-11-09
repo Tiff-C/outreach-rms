@@ -1,9 +1,11 @@
+""" Imports for use in schools app models """
 from django.db import models
 
 # Create your models here.
 
 
 class School(models.Model):
+    """ A class to define the schools model """
     name = models.CharField(max_length=254)
     address_1 = models.CharField("Address line 1", max_length=128,)
     address_2 = models.CharField("Address line 2", max_length=128, blank=True)
@@ -17,6 +19,7 @@ class School(models.Model):
 
 
 class Event(models.Model):
+    """ A class to define the events model """
     school = models.ForeignKey(School, null=True, on_delete=models.SET_NULL)
     date = models.DateField(auto_now=False, auto_now_add=False)
 
