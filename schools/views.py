@@ -3,6 +3,7 @@ from .models import School, Event
 from .forms import Add_school, Add_event
 # Create your views here.
 
+
 def all_schools(request):
     schools = School.objects.all()
     context = {

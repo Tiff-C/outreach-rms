@@ -17,7 +17,7 @@ class School(models.Model):
 
 
 class Event(models.Model):
-    school = models.ForeignKey(School,null=True, on_delete=models.SET_NULL)
+    school = models.ForeignKey(School, null=True, on_delete=models.SET_NULL)
     date = models.DateField(auto_now=False, auto_now_add=False)
 
     def __str__(self):
