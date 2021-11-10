@@ -1,10 +1,12 @@
 """ Import required modules for schools app views """
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import School, Event
 from .forms import Add_school, Add_event
 # Create your views here.
 
 
+@login_required
 def all_schools(request):
     """ A view to show all schools """
 
@@ -15,6 +17,7 @@ def all_schools(request):
     return render(request, 'schools/schools.html', context)
 
 
+@login_required
 def all_events(request):
     """ A view to show all events """
 
@@ -25,6 +28,7 @@ def all_events(request):
     return render(request, 'schools/events.html', context)
 
 
+@login_required
 def add_school(request):
     """ A view to add a school """
     if request.method == 'POST':
@@ -40,6 +44,7 @@ def add_school(request):
     return render(request, 'schools/add_school.html', context)
 
 
+@login_required
 def add_event(request):
     """ A view to add an event """
     if request.method == 'POST':

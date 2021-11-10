@@ -1,10 +1,12 @@
 """ Import required modules for schools app views """
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Student
 from .forms import Add_student
 # Create your views here.
 
 
+@login_required
 def all_referrals(request):
     """ A view to show all current referrals """
 
@@ -15,6 +17,7 @@ def all_referrals(request):
     return render(request, 'students/referrals.html', context)
 
 
+@login_required
 def add_student(request):
     """ A view to add a new referral """
     if request.method == 'POST':

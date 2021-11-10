@@ -1,10 +1,13 @@
 """ Import required modules for use in courses app views """
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Course
 from .forms import Add_course
+
 # Create your views here.
 
 
+@login_required
 def all_courses(request):
     """ A view to show all courses """
     courses = Course.objects.all()
@@ -14,6 +17,7 @@ def all_courses(request):
     return render(request, 'courses/courses.html', context)
 
 
+@login_required
 def add_course(request):
     """ A view to add a new course """
     if request.method == 'POST':
