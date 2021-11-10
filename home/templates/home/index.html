@@ -9,57 +9,69 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-lg-4 mb-2">
+            <div class="col-md-6 col-lg-4 mb-2 mt-2">
                 <div class="card teal-bg">
                     <div class="card-body">
                         <h2 class="card-title">
                             <a href="#" class="link-light">Dashboard</a>
                         </h2>
+                        <hr>
+                        <a href="#" class="card-link link-light">View Reports</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 mb-2">
+            <div class="col-md-6 col-lg-4 mb-2 mt-2">
                 <div class="card teal-bg">
                     <div class="card-body">
                         <h2 class="card-title">
-                            <a href="#" class="link-light">Referrals</a>
+                            <a href="{% url 'referrals' %}" class="link-light">Referrals</a>
                         </h2>
+                        <hr>
+                        <a href="{% url 'new_referral' %}" class="card-link link-light">New Referral</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 mb-2">
+            <div class="col-md-6 col-lg-4 mb-2 mt-2">
                 <div class="card teal-bg">
                     <div class="card-body">
                         <h2 class="card-title">
-                            <a href="#" class="link-light">Courses</a>
+                            <a href="{% url 'courses' %}" class="link-light">Courses</a>
                         </h2>
+                        <hr>
+                        <a href="{% url 'add_course' %}" class="card-link link-light">New Course</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 mb-2">
+            <div class="col-md-6 col-lg-4 mb-2 mt-2">
                 <div class="card teal-bg">
                     <div class="card-body">
                         <h2 class="card-title">
-                            <a href="#" class="link-light">Schools</a>
+                            <a href="{% url 'schools' %}" class="link-light">Schools</a>
                         </h2>
+                        <hr>
+                        <a href="{% url 'add_school' %}" class="card-link link-light">New School</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 mb-2">
+            <div class="col-md-6 col-lg-4 mb-2 mt-2">
                 <div class="card teal-bg">
                     <div class="card-body">
                         <h2 class="card-title">
-                            <a href="#" class="link-light">Events</a>
+                            <a href="{% url 'events' %}" class="link-light">Events</a>
                         </h2>
+                        <hr>
+                        <a href="{% url 'add_event' %}" class="card-link link-light">New Event</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 mb-2">
+            <div class="col-md-6 col-lg-4 mb-2 mt-2">
                 <div class="card teal-bg">
                     <div class="card-body">
                         <h2 class="card-title">
                             <a href="#" class="link-light">Assessments</a>
                         </h2>
+                        <hr>
+                        <a href="#" class="card-link link-light">View Assessments</a>
                     </div>
                 </div>
             </div>
