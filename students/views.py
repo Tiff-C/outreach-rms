@@ -1,3 +1,30 @@
-from django.shortcuts import render
-
+""" Import required modules for schools app views """
+from django.shortcuts import render, redirect
+from .models import Student
+from .forms import Add_student
 # Create your views here.
+
+
+def all_referrals(request):
+    """ A view to show all current referrals """
+
+    referrals = Student.objects.all()
+    context = {
+        'referrals': referrals
+    }
+    return render(request, 'students/referrals.html', context)
+
+
+def add_student(request):
+    """ A view to add a new referral """
+    if request.method == 'POST':
+        form = Add_student(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return redirect('referrals')
+    form = Add_student()
+    context = {
+        'form': form
+    }
+    return render(request, 'students/new_referral.html', context)
