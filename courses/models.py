@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 
 
-class Courses(models.Model):
+class Course(models.Model):
     """ A class to define the courses model """
     name = models.CharField('Course Name', max_length=128)
 

@@ -1,13 +1,13 @@
 """ Import required modules for use in courses app views """
 from django.shortcuts import render, redirect
-from .models import Courses
+from .models import Course
 from .forms import Add_course
 # Create your views here.
 
 
 def all_courses(request):
     """ A view to show all courses """
-    courses = Courses.objects.all()
+    courses = Course.objects.all()
     context = {
         'courses': courses
     }
