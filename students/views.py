@@ -18,7 +18,7 @@ def all_referrals(request):
 
 
 @login_required
-def add_student(request):
+def add_referral(request):
     """ A view to add a new referral """
     if request.method == 'POST':
         form = Add_student(request.POST)

@@ -1,7 +1,6 @@
 """
-Import required modules
+Import required modules for home app urls
 """
-from django.contrib import admin
 from django.urls import path
 from . import views
 
