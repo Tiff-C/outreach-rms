@@ -7,5 +7,30 @@
 {% endblock %}
 
 {% block content %}
-    {{ referral }}
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col">
+                <h1>Referral Details</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p><strong>Name:</strong> {{ referral }}</p>
+                <p><strong>Phone:</strong> {{ referral.phone }}</p>
+                <p><strong>Email:</strong> {{ referral.email }}</p>
+            </div>
+            <div class="col">
+                <p><strong>Address 1:</strong> {{ referral.address_1 }}</p>
+                <p><strong>Address 2:</strong> {{ referral.address_2 }}</p>
+                <p><strong>Postcode:</strong> {{ referral.postcode |upper }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p><strong>Referred by:</strong> {{ referral.referred_by }}</p>
+                <p><strong>School:</strong> {{ referral.school }}</p>
+                <p><strong>Referral Date:</strong> {{ referral.referral_date }}</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
