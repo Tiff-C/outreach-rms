@@ -1,5 +1,5 @@
 """ Import required modules for schools app views """
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Student
 from .forms import Add_student
@@ -31,3 +31,15 @@ def add_referral(request):
         'form': form
     }
     return render(request, 'students/new_referral.html', context)
+
+
+@login_required
+def referral_details(request, student_id):
+    """ A view to show student details """
+    referral = get_object_or_404(Student, pk=student_id)
+
+    context = {
+        'referral': referral,
+    }
+
+    return render(request, 'students/referral_details.html', context)

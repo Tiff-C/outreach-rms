@@ -10,25 +10,31 @@
     <div class="container mt-2">
         <div class="row">
             <div class="col">
-                <a class="btn teal-bg link-light" href="{% url 'new_referral' %}" role="button">New Referral</a>
+                <a class="btn teal-bg link-light mt-2 mb-2" href="{% url 'new_referral' %}" role="button">New Referral</a>
             </div>
         </div>
-        <table class="table table-hover">
+        <table class="table table-hover mt-2">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Phone</th>
                     <th>Email</th>
-                    <th>School</th>
+                    <th>Quick Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for referral in referrals %}
                 <tr>
-                    <td><a href="#">{{ referral }}</a></td>
+                    <td><a href="{% url 'referral_details' referral.id %}">{{ referral }}</a></td>
                     <td>{{ referral.phone }}</td>
                     <td>{{ referral.email }}</td>
-                    <td>{{ referral.school }}</td>
+                    <td>
+                        <a href="#" class="btn btn-sm btn-info">Edit</a>
+                        <a href="#" class="btn btn-sm btn-success">Status</a>
+                        {% if user.is_staff %}
+                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
