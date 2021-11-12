@@ -11,9 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
-import mimetypes
 import dj_database_url
-import django_heroku
 if os.path.exists("env.py"):
     import env  # noqa
 
@@ -61,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'outreach_rms.urls'
@@ -171,8 +170,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# required for django-heroku
-django_heroku.settings(locals())
-
-# Added to resolve mimetype error for CSS files on deployed project
-mimetypes.add_type("text/css", ".css", True)
