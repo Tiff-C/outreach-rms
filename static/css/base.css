@@ -4,18 +4,36 @@ body {
 }
 
 nav {
-    background-color: #00695c;
+    background-color: #00362a;
 }
 
 header {
     height: 64px;
 }
 
+table {
+    background-color: #ffffff;
+}
+
+thead {
+    background-color: #006152;
+    color: #ffffff;
+}
+
+.nav-link {
+    color: #ffffff;
+}
+
 .teal-bg {
-    background-color: #00897b;
+    background-color: #006152;
 }
 
 .link-light {
-    color: #f5f5f5;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.link-dark {
+    color: black;
     text-decoration: none;
 }

@@ -25,7 +25,7 @@
             <tbody>
                 {% for referral in referrals %}
                 <tr>
-                    <td><a href="{% url 'referral_details' referral.id %}">{{ referral }}</a></td>
+                    <td><a class="link-dark" href="{% url 'referral_details' referral.id %}">{{ referral }}</a></td>
                     <td>{{ referral.phone }}</td>
                     <td>{{ referral.email }}</td>
                     <td>
