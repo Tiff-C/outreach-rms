@@ -10,22 +10,33 @@
     <div class="container mt-2">
         <div class="row">
             <div class="col">
-                <a class="btn teal-bg link-light" href="{% url 'add_course' %}" role="button">Add Course</a>
+                <a class="btn teal-bg link-light mt-2 mb-2" href="{% url 'add_course' %}" role="button">Add Course</a>
             </div>
         </div>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Course</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for course in courses %}
-                <tr>
-                    <td><a href="#">{{ course.name }}</a></td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col">
+                <table class="table table-hover mt-2">
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Quick Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for course in courses %}
+                            <tr>
+                                <td><a class="link-dark" href="#">{{ course.name }}</a></td>
+                                <td>
+                                    <a href="#" class="btn btn-sm teal-bg">Edit</a>
+                                    {% if user.is_staff %}
+                                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 {% endblock %}

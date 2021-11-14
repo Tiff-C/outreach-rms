@@ -13,31 +13,35 @@
                 <a class="btn teal-bg link-light mt-2 mb-2" href="{% url 'new_referral' %}" role="button">New Referral</a>
             </div>
         </div>
-        <table class="table table-hover mt-2">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Quick Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for referral in referrals %}
-                <tr>
-                    <td><a class="link-dark" href="{% url 'referral_details' referral.id %}">{{ referral }}</a></td>
-                    <td>{{ referral.phone }}</td>
-                    <td>{{ referral.email }}</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-info">Edit</a>
-                        <a href="#" class="btn btn-sm btn-success">Status</a>
-                        {% if user.is_staff %}
-                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                        {% endif %}
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col">
+                <table class="table table-hover mt-2">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Quick Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for referral in referrals %}
+                            <tr>
+                                <td><a class="link-dark" href="{% url 'referral_details' referral.id %}">{{ referral }}</a></td>
+                                <td>{{ referral.phone }}</td>
+                                <td>{{ referral.email }}</td>
+                                <td>
+                                    <a href="#" class="btn btn-sm teal-bg">Edit</a>
+                                    <a href="#" class="btn btn-sm teal-bg">Status</a>
+                                    {% if user.is_staff %}
+                                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 {% endblock %}
