@@ -1,7 +1,7 @@
 """ Required imports for Students app models """
 from django.db import models
 from django.contrib.auth.models import User
-from courses.models import Course, CourseClass
+from courses.models import Course
 from schools.models import School
 
 # Create your models here.
@@ -63,7 +63,6 @@ class Student(models.Model):
         "Initial Assessment Completed", default=False)
     status = models.CharField(
         choices=status_choices, max_length=3, default=REFERRAL)
-    courses = models.ManyToManyField(CourseClass)
     funding = models.CharField(
         choices=funding_choices, max_length=8, default=NO)
 

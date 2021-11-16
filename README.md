@@ -70,11 +70,35 @@ To ensure acessibility I used the [Material.io](https://material.io/) colour too
 
 ## Deployment
 
+This project has been deployed via [Heroku](https://www.heroku.com/). To prepare the app for deployment I created a `requirements.txt` file and a `Procfile`. I did this using the following commands in the terminal:
 
+```
+pip3 freeze --local > requirements.txt
+```
+```
+echo web: gunicorn outreach_rms.wsgi > Procfile
+```
+
+When deploying the app on Heroku I used the GitHub deployment method and put the key, value pairs from the `env.py` in settings > config vars e.g `DEBUG` as the key and `False` as the value.
+
+Once this info had been input into Heroku and the `requirements.txt` file and the `Prockfile` have been pushed to GitHub, I then went to deploy > enable automatic deployments and then selected 'deploy branch'.This method of deployment allows the app to update whenever new code is pushed to the GitHub repository.
+
+### Issues During 
 
 ### How to run This Project Locally
-#### The `env.py` doc
+When running this project locally you will need to setup an env.py file, an example of this file can be seen below. Once you have this setup run `python manage.py runserver` to run the project locally.
 
+#### The `env.py` file
+As the env.py file contains sensitive information please ensure it is not pushed to a public repository.
+
+```python
+""" import os to set env defaults """
+import os
+
+os.environ.setdefault("SECRET_KEY", "<SECRET_KEY_HERE>")
+os.environ.setdefault("DEBUG", "FALSE")
+os.environ.setdefault("DATABASE_URL", "<DB_URL_HERE>")
+```
 
 
 ## Credits
