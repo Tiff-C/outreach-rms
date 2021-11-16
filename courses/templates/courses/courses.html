@@ -25,7 +25,7 @@
                     <tbody>
                         {% for course in courses %}
                             <tr>
-                                <td><a class="link-dark" href="#">{{ course.name }}</a></td>
+                                <td><a class="link-dark" href="{% url 'course_details' course.id %}">{{ course.name }}</a></td>
                                 <td>
                                     <a href="#" class="btn btn-sm teal-bg">Edit</a>
                                     {% if user.is_staff %}

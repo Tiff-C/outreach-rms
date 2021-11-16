@@ -1,5 +1,5 @@
 """ Import required modules for use in courses app views """
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Course
 from .forms import Add_course
@@ -31,3 +31,15 @@ def add_course(request):
         'form': form
     }
     return render(request, 'courses/add_course.html', context)
+
+
+@login_required
+def course_details(request, course_id):
+    """ A view to show course details """
+    course = get_object_or_404(Course, pk=course_id)
+
+    context = {
+        'course': course,
+    }
+
+    return render(request, 'courses/course_details.html', context)
