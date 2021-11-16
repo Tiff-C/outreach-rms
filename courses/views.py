@@ -34,6 +34,30 @@ def add_course(request):
 
 
 @login_required
+def edit_course(request, course_id):
+    """ A view to edit a course """
+    course = get_object_or_404(Course, pk=course_id)
+    if request.method == 'POST':
+        form = Add_course(request.POST, instance=course)
+        if form.is_valid():
+            form.save()
+
+            return redirect('courses')
+    form = Add_course(instance=course)
+    context = {
+        'form': form
+    }
+    return render(request, 'courses/edit_course.html', context)
+
+
+@login_required
+def delete_course(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    course.delete()
+    return redirect('courses')
+
+
+@login_required
 def course_details(request, course_id):
     """ A view to show course details """
     course = get_object_or_404(Course, pk=course_id)
