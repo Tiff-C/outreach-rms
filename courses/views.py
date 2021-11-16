@@ -45,7 +45,8 @@ def edit_course(request, course_id):
             return redirect('courses')
     form = Add_course(instance=course)
     context = {
-        'form': form
+        'form': form,
+        'course': course
     }
     return render(request, 'courses/edit_course.html', context)
 
