@@ -3,7 +3,7 @@ from django import forms
 from .models import School, Event
 
 
-class Add_school(forms.ModelForm):
+class SchoolForm(forms.ModelForm):
     """ A form class to be used in the add_school view """
     class Meta:
         model = School
@@ -18,8 +18,11 @@ class Add_school(forms.ModelForm):
         ]
 
 
-class Add_event(forms.ModelForm):
+class EventForm(forms.ModelForm):
     """ A form class to be used in the add_event view """
     class Meta:
         model = Event
         fields = ['school', 'date']
+        widgets = {
+            'date': forms.SelectDateWidget
+        }

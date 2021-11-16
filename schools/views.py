@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import School, Event
-from .forms import Add_school, Add_event
+from .forms import SchoolForm, EventForm
 # Create your views here.
 
 
@@ -32,12 +32,12 @@ def all_events(request):
 def add_school(request):
     """ A view to add a school """
     if request.method == 'POST':
-        form = Add_school(request.POST)
+        form = SchoolForm(request.POST)
         if form.is_valid():
             form.save()
 
             return redirect('schools')
-    form = Add_school()
+    form = SchoolForm()
     context = {
         'form': form
     }
@@ -48,12 +48,12 @@ def add_school(request):
 def add_event(request):
     """ A view to add an event """
     if request.method == 'POST':
-        form = Add_event(request.POST)
+        form = EventForm(request.POST)
         if form.is_valid():
             form.save()
 
             return redirect('events')
-    form = Add_event()
+    form = EventForm()
     context = {
         'form': form
     }
@@ -90,13 +90,13 @@ def edit_school(request, school_id):
     school = get_object_or_404(School, pk=school_id)
     
     if request.method == 'POST':
-        form = Add_school(request.POST, instance=school)
+        form = SchoolForm(request.POST, instance=school)
         if form.is_valid():
             form.save()
 
             return redirect('schools')
 
-    form = Add_school(instance=school)
+    form = SchoolForm(instance=school)
     context = {
         'form': form,
         'school': school
@@ -118,13 +118,13 @@ def edit_event(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     
     if request.method == 'POST':
-        form = Add_event(request.POST, instance=event)
+        form = EventForm(request.POST, instance=event)
         if form.is_valid():
             form.save()
 
             return redirect('events')
 
-    form = Add_event(instance=event)
+    form = EventForm(instance=event)
     context = {
         'form': form,
         'event': event

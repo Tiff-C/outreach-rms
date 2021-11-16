@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Student
-from .forms import Add_student
+from .forms import SchoolForm
 # Create your views here.
 
 
@@ -21,12 +21,12 @@ def all_referrals(request):
 def add_referral(request):
     """ A view to add a new referral """
     if request.method == 'POST':
-        form = Add_student(request.POST)
+        form = StudentForm(request.POST)
         if form.is_valid():
             form.save()
 
             return redirect('referrals')
-    form = Add_student()
+    form = StudentForm()
     context = {
         'form': form
     }

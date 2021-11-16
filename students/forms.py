@@ -3,7 +3,7 @@ from django import forms
 from .models import Student
 
 
-class Add_student(forms.ModelForm):
+class StudentForm(forms.ModelForm):
     """ A form class to be used in the add_referral view """
     class Meta:
         model = Student
@@ -19,3 +19,6 @@ class Add_student(forms.ModelForm):
             'school',
             'int_courses',
         ]
+        widgets = {
+            'dob': forms.SelectDateWidget
+        }
