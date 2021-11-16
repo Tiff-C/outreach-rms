@@ -33,9 +33,9 @@
                                 <td>{{ school.phone }}</td>
                                 <td>{{ school.email }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-sm teal-bg">Edit</a>
+                                    <a href="{% url 'edit_school' school.id %}" class="btn btn-sm teal-bg">Edit</a>
                                     {% if user.is_staff %}
-                                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                        <a href="{% url 'delete_school' school.id %}" class="btn btn-sm btn-danger">Delete</a>
                                     {% endif %}
                                 </td>
                             </tr>

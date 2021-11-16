@@ -10,17 +10,17 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Add a new Event</h1>
+                <h1>Edit Event</h1>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <form method="POST" action="{% url 'add_event' %}" class="align-items-center">
+                <form method="POST" action="{% url 'edit_event' event.id %}" class="align-items-center">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <div>
                         <p>
-                            <button type="submit" class="btn teal-bg">Add Event</button>
+                            <button type="submit" class="btn teal-bg">Update Event</button>
                         </p>
                     </div>
                 </form>

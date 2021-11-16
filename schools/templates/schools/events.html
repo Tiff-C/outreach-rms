@@ -29,9 +29,9 @@
                                 <td><a class="link-dark" href="{% url 'event_details' event.id %}">{{ event }}</a></td>
                                 <td>{{ event.date }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-sm teal-bg">Edit</a>
+                                    <a href="{% url 'edit_event' event.id %}" class="btn btn-sm teal-bg">Edit</a>
                                     {% if user.is_staff %}
-                                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                        <a href="{% url 'delete_event' event.id %}" class="btn btn-sm btn-danger">Delete</a>
                                     {% endif %}
                                 </td>
                             </tr>

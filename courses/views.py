@@ -53,7 +53,7 @@ def edit_course(request, course_id):
 
 @login_required
 def delete_course(request, course_id):
-    course = get_object_or_404(Course, id=course_id)
+    course = get_object_or_404(Course, pk=course_id)
     course.delete()
     return redirect('courses')
 

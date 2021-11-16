@@ -82,3 +82,59 @@ def event_details(request, event_id):
     }
 
     return render(request, 'schools/event_details.html', context)
+
+
+@login_required
+def edit_school(request, school_id):
+    """ A view to edit a school """
+    school = get_object_or_404(School, pk=school_id)
+    
+    if request.method == 'POST':
+        form = Add_school(request.POST, instance=school)
+        if form.is_valid():
+            form.save()
+
+            return redirect('schools')
+
+    form = Add_school(instance=school)
+    context = {
+        'form': form,
+        'school': school
+    }
+    return render(request, 'schools/edit_school.html', context)
+
+
+@login_required
+def delete_school(request, school_id):
+    """ A view to delete a school """
+    school = get_object_or_404(School, pk=school_id)
+    school.delete()
+    return redirect('schools')
+
+
+@login_required
+def edit_event(request, event_id):
+    """ A view to edit an event """
+    event = get_object_or_404(Event, pk=event_id)
+    
+    if request.method == 'POST':
+        form = Add_event(request.POST, instance=event)
+        if form.is_valid():
+            form.save()
+
+            return redirect('events')
+
+    form = Add_event(instance=event)
+    context = {
+        'form': form,
+        'event': event
+    }
+    return render(request, 'schools/edit_event.html', context)
+
+
+@login_required
+def delete_event(request, event_id):
+    """ A view to delete an event """
+    event = get_object_or_404(Event, pk=event_id)
+    event.delete()
+    return redirect('events')
