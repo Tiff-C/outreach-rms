@@ -26,7 +26,7 @@
                     <tbody>
                         {% for event in events %}
                             <tr>
-                                <td><a class="link-dark" href="#">{{ event }}</a></td>
+                                <td><a class="link-dark" href="{% url 'event_details' event.id %}">{{ event }}</a></td>
                                 <td>{{ event.date }}</td>
                                 <td>
                                     <a href="#" class="btn btn-sm teal-bg">Edit</a>

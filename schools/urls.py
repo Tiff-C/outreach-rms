@@ -9,4 +9,6 @@ urlpatterns = [
     path('events/', views.all_events, name='events'),
     path('add_school/', views.add_school, name='add_school'),
     path('events/add_event/', views.add_event, name='add_event'),
+    path('<school_id>', views.school_details, name='school_details'),
+    path('<event_id>', views.event_details, name='event_details'),
 ]

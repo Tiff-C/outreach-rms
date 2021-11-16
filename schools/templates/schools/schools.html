@@ -28,7 +28,7 @@
                     <tbody>
                         {% for school in schools %}
                             <tr>
-                                <td><a class="link-dark" href="#">{{ school.name }}</a></td>
+                                <td><a class="link-dark" href="{% url 'school_details' school.id %}">{{ school.name }}</a></td>
                                 <td>{{ school.contact }}</td>
                                 <td>{{ school.phone }}</td>
                                 <td>{{ school.email }}</td>
