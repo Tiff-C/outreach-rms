@@ -4,7 +4,7 @@ from .models import Student
 
 
 class Add_student(forms.ModelForm):
-    """ A form class to be used in the add_student view """
+    """ A form class to be used in the add_referral view """
     class Meta:
         model = Student
         fields = [
@@ -13,7 +13,9 @@ class Add_student(forms.ModelForm):
             'address_1',
             'address_2',
             'postcode',
+            'dob',
             'phone',
             'email',
-            'school'
+            'school',
+            'int_courses',
         ]
