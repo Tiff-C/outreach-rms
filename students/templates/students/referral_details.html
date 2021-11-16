@@ -18,13 +18,29 @@
                 <p><strong>Name:</strong> {{ referral }}</p>
                 <p><strong>Phone:</strong> {{ referral.phone }}</p>
                 <p><strong>Email:</strong> {{ referral.email }}</p>
+                <p><strong>D.O.B:</strong> {{ referral.dob }}</p>
             </div>
             <div class="col">
                 <p><strong>Address 1:</strong> {{ referral.address_1 }}</p>
                 <p><strong>Address 2:</strong> {{ referral.address_2 }}</p>
                 <p><strong>Postcode:</strong> {{ referral.postcode |upper }}</p>
+                <p><strong>Status:</strong> {{ referral.status }}</p>
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <p><strong>Courses interested in:</strong></p>
+                <ul>
+                    {% with referral.int_courses.all as int_courses %}
+                        {% for int_course in int_courses %}
+                                <li>{{ int_course }}</li>
+                        {% endfor %}
+                    {% endwith %}
+                </ul>
+            </div>
+        </div>
+        <hr>
         <div class="row">
             <div class="col">
                 <p><strong>Referred by:</strong> {{ referral.referred_by }}</p>
