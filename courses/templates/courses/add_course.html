@@ -15,7 +15,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <form method="POST" action="add_course" class="align-items-center">
+                <form method="POST" action="{% url 'add_course' %}" class="align-items-center">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <div>
