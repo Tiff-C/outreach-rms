@@ -12,7 +12,11 @@ urlpatterns = [
     path('<school_id>', views.school_details, name='school_details'),
     path('<event_id>', views.event_details, name='event_details'),
     path('edit_school/<school_id>', views.edit_school, name='edit_school'),
-    path('delete_school/<school_id>', views.delete_school, name='delete_school'),
+    path(
+        'delete_school/<school_id>',
+        views.delete_school,
+        name='delete_school'
+    ),
     path('edit_event/<event_id>', views.edit_event, name='edit_event'),
     path('delete_event/<event_id>', views.delete_event, name='delete_event'),
 ]

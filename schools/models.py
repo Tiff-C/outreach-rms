@@ -1,5 +1,6 @@
 """ Imports for use in schools app models """
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -22,6 +23,8 @@ class Event(models.Model):
     """ A class to define the events model """
     school = models.ForeignKey(School, null=True, on_delete=models.SET_NULL)
     date = models.DateField(auto_now=False, auto_now_add=False)
+    start_time = models.TimeField("Event Start Time")
+    staff = models.ManyToManyField(User, verbose_name="Staff Attending Event")
 
     def __str__(self):
         return '%s %s' % (self.school, self.date)

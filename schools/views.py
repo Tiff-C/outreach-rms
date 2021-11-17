@@ -88,7 +88,7 @@ def event_details(request, event_id):
 def edit_school(request, school_id):
     """ A view to edit a school """
     school = get_object_or_404(School, pk=school_id)
-    
+
     if request.method == 'POST':
         form = SchoolForm(request.POST, instance=school)
         if form.is_valid():
@@ -116,7 +116,7 @@ def delete_school(request, school_id):
 def edit_event(request, event_id):
     """ A view to edit an event """
     event = get_object_or_404(Event, pk=event_id)
-    
+
     if request.method == 'POST':
         form = EventForm(request.POST, instance=event)
         if form.is_valid():

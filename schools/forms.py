@@ -22,7 +22,8 @@ class EventForm(forms.ModelForm):
     """ A form class to be used in the add_event view """
     class Meta:
         model = Event
-        fields = ['school', 'date']
+        fields = ['school', 'date', 'start_time', 'staff']
         widgets = {
-            'date': forms.SelectDateWidget
+            'date': forms.SelectDateWidget,
+            'staff': forms.CheckboxSelectMultiple,
         }
