@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block page_header %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col">
+                <h1>Class Details</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p><strong>Name:</strong> {{ course_class }}</p>
+                <p><strong>Course:</strong> {{ course_class.course }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block page_header %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col">
+                <a class="btn teal-bg link-light mt-2 mb-2" href="{% url 'add_class' %}" role="button">Add Class</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table table-hover mt-2">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Course</th>
+                            <th>Quick Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for course in classes %}
+                            <tr>
+                                <td><a class="link-dark" href="{% url 'class_details' course.id %}">{{ course.name }}</a></td>
+                                <td><a class="link-dark" href="{% url 'course_details' course.id %}">{{ course.course }}</a></td>
+                                <td>
+                                    <a href="{% url 'edit_class' course.id %}" class="btn btn-sm teal-bg">Edit</a>
+                                    {% if user.is_staff %}
+                                        <a href="{% url 'delete_class' course.id %}" class="btn btn-sm btn-danger">Delete</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
