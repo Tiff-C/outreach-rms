@@ -10,11 +10,6 @@
     <div class="container mt-2">
         <div class="row">
             <div class="col">
-                <a class="btn teal-bg link-light mt-2 mb-2" href="{% url 'new_referral' %}" role="button">New Referral</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
                 <table class="table table-hover mt-2">
                     <thead>
                         <tr>
@@ -26,19 +21,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for referral in referrals %}
+                        {% for student in students %}
                             <tr>
-                                <td><a class="link-dark" href="{% url 'referral_details' referral.id %}">{{ referral }}</a></td>
-                                <td>{{ referral.phone }}</td>
-                                <td>{{ referral.email }}</td>
+                                <td><a class="link-dark" href="{% url 'student_details' student.id %}">{{ student }}</a></td>
+                                <td>{{ student.phone }}</td>
+                                <td>{{ student.email }}</td>
                                 <td>
-                                    <a href="{% url 'add_student' referral.id %}" class="btn btn-sm teal-bg">Enrol</a>
-                                    <a href="#" class="btn btn-sm teal-bg">Not Interested</a>
+                                    <a href="#" class="btn btn-sm teal-bg">Alumni</a>
+                                    <a href="#" class="btn btn-sm teal-bg">Progression</a>
                                 </td>
                                 <td>
-                                    <a href="{% url 'edit_referral' referral.id %}" class="btn btn-sm teal-bg">Edit</a>
+                                    <a href="{% url 'edit_student' student.id %}" class="btn btn-sm teal-bg">Edit</a>
                                     {% if user.is_staff %}
-                                        <a href="{% url 'delete_referral' referral.id %}" class="btn btn-sm btn-danger">Delete</a>
+                                        <a href="{% url 'delete_student' student.id %}" class="btn btn-sm btn-danger">Delete</a>
                                     {% endif %}
                                 </td>
                             </tr>
