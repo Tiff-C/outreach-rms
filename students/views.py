@@ -144,11 +144,9 @@ def student_details(request, student_id):
     are enrolled on.
     """
     student = get_object_or_404(Student, pk=student_id)
-    courses = CourseClass.objects.filter(students=student_id)
 
     context = {
         'student': student,
-        'courses': courses
     }
 
     return render(request, 'students/student_details.html', context)

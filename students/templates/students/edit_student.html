@@ -10,17 +10,17 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Edit Referral</h1>
+                <h1>Edit Student</h1>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <form method="POST" action="{% url 'edit_referral' referral.id %}" class="align-items-center">
+                <form method="POST" action="{% url 'edit_student' student.id %}" class="align-items-center">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <div>
                         <p>
-                            <button type="submit" class="btn teal-bg">Update Referral</button>
+                            <button type="submit" class="btn teal-bg">Update Student</button>
                         </p>
                     </div>
                 </form>

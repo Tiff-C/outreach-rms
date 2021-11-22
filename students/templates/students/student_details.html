@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block page_header %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col">
+                <h1>Student Details</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p><strong>Name:</strong> {{ student }}</p>
+                <p><strong>Phone:</strong> {{ student.phone }}</p>
+                <p><strong>Email:</strong> {{ student.email }}</p>
+                <p><strong>D.O.B:</strong> {{ student.dob }}</p>
+            </div>
+            <div class="col">
+                <p><strong>Address 1:</strong> {{ student.address_1 }}</p>
+                <p><strong>Address 2:</strong> {{ student.address_2 }}</p>
+                <p><strong>Postcode:</strong> {{ student.postcode |upper }}</p>
+                <p><strong>Status:</strong> {{ student.status }}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <p><strong>Courses interested in:</strong></p>
+                <ul>
+                    {% with student.int_courses.all as int_courses %}
+                        {% for int_course in int_courses %}
+                                <li>{{ int_course }}</li>
+                        {% endfor %}
+                    {% endwith %}
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <p><strong>Referred by:</strong> {{ student.referred_by }}</p>
+                <p><strong>School:</strong> {{ student.school }}</p>
+                <p><strong>Referral Date:</strong> {{ student.referral_date }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

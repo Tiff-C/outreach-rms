@@ -48,5 +48,5 @@ class StudentForm(forms.ModelForm):
         widgets = {
             'dob': forms.SelectDateWidget(years=range(1940, 2021)),
             'int_courses': forms.CheckboxSelectMultiple,
-            'courses': forms.CheckboxSelectMultiple,
+            # 'courses': forms.CheckboxSelectMultiple,
         }
