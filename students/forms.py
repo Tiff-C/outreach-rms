@@ -41,9 +41,9 @@ class StudentForm(forms.ModelForm):
             'school',
             'status',
             'int_courses',
-            'enrol_num',
-            'enrol_url',
-            'courses',
+            # 'enrol_num',
+            # 'enrol_url',
+            # 'courses',
         ]
         widgets = {
             'dob': forms.SelectDateWidget(years=range(1940, 2021)),

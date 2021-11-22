@@ -16,11 +16,13 @@ class Student(models.Model):
     REFERRAL = 'REF'
     STUDENT = 'STD'
     ALUMNI = 'ALM'
+    PROGRESSION = 'PRG'
     NO_LONGER_INT = 'NLI'
     status_choices = [
         (REFERRAL, 'Referral'),
         (STUDENT, 'Enrolled'),
         (ALUMNI, 'Alumni'),
+        (PROGRESSION, 'Progression'),
         (NO_LONGER_INT, 'No Longer Interested'),
     ]
 
@@ -65,9 +67,15 @@ class Student(models.Model):
         choices=status_choices, max_length=3, default=REFERRAL)
     funding = models.CharField(
         choices=funding_choices, max_length=8, default=NO)
-    enrol_num = models.CharField("Student Number", max_length=8, blank=True)
-    enrol_url = models.URLField("Link to myPortal Page", blank=True)
-    courses = models.ManyToManyField(CourseClass)
+    # enrol_num = models.CharField("Student Number", max_length=8, blank=True)
+    # enrol_url = models.URLField("Link to myPortal Page", blank=True)
+    # courses = models.ManyToManyField(CourseClass, blank=True)
+    # prog_course = models.CharField(
+    #     "Progression Course Name", max_length=128, blank=True)
+    # prog_course_code = models.CharField(
+    #     "Progression Course Name", max_length=11, blank=True)
+    # prog_course_level = models.CharField(
+    #     "Progression Course Code", max_length=15, blank=True)
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
