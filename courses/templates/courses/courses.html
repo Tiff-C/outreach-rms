@@ -15,27 +15,33 @@
         </div>
         <div class="row">
             <div class="col">
-                <table class="table table-hover mt-2">
-                    <thead>
-                        <tr>
-                            <th>Course</th>
-                            <th>Quick Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for course in courses %}
+                <div class="table-responsive">
+                    <table class="table table-hover mt-2">
+                        <thead>
                             <tr>
-                                <td><a class="link-dark" href="{% url 'course_details' course.id %}">{{ course.name }}</a></td>
-                                <td>
-                                    <a href="{% url 'edit_course' course.id %}" class="btn btn-sm teal-bg">Edit</a>
-                                    {% if user.is_staff %}
-                                        <a href="{% url 'delete_course' course.id %}" class="btn btn-sm btn-danger">Delete</a>
-                                    {% endif %}
-                                </td>
+                                <th>Course</th>
+                                <th>Quick Actions</th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {% for course in courses %}
+                                <tr>
+                                    <td><a class="link-dark" href="{% url 'course_details' course.id %}">{{ course.name }}</a></td>
+                                    <td>
+                                        <a href="{% url 'edit_course' course.id %}" class="btn btn-sm teal-bg">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        {% if user.is_staff %}
+                                            <a href="{% url 'delete_course' course.id %}" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

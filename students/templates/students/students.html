@@ -10,36 +10,40 @@
     <div class="container mt-2">
         <div class="row">
             <div class="col">
-                <table class="table table-hover mt-2">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Update Status</th>
-                            <th>Quick Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for student in students %}
+                <div class="table-responsive">
+                    <table class="table table-hover mt-2">
+                        <thead>
                             <tr>
-                                <td><a class="link-dark" href="{% url 'student_details' student.id %}">{{ student }}</a></td>
-                                <td>{{ student.phone }}</td>
-                                <td>{{ student.email }}</td>
-                                <td>
-                                    <a href="#" class="btn btn-sm teal-bg">Alumni</a>
-                                    <a href="#" class="btn btn-sm teal-bg">Progression</a>
-                                </td>
-                                <td>
-                                    <a href="{% url 'edit_student' student.id %}" class="btn btn-sm teal-bg">Edit</a>
-                                    {% if user.is_staff %}
-                                        <a href="{% url 'delete_student' student.id %}" class="btn btn-sm btn-danger">Delete</a>
-                                    {% endif %}
-                                </td>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Update Status</th>
+                                <th>Quick Actions</th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {% for student in students %}
+                                <tr>
+                                    <td><a class="link-dark" href="{% url 'student_details' student.id %}">{{ student }}</a></td>
+                                    <td>{{ student.phone }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-sm teal-bg">Alumni</a>
+                                        <a href="#" class="btn btn-sm teal-bg">Progression</a>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'edit_student' student.id %}" class="btn btn-sm teal-bg">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        {% if user.is_staff %}
+                                            <a href="{% url 'delete_student' student.id %}" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
