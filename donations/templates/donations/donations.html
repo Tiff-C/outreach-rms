@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block page_header %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="row mb-4">
+            <div class="col">
+                <h1>Donations to Outreach RMS</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>
+                    Outreach RMS has been created and developed as an open source referral management system. The intended audience is Higher Education Providers, with a goal of creating a free platform that allows educational institutes to handle internal and external referrals with ease. Allowing for tracking of referrals in one place, rather than tracking in multiple spreadsheets, emails and documents.
+                </p>
+                <p>
+                    If you have found this project useful to your team or if you would like to support the project and its goals please help us continue our work by making a donation.
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+    <script type="text/javascript">
+        var stripe = Stripe('pk_test_51Jyw7ALOWlq9cjeTp1PDgFc8zPWk4NOq3sD47cPBMP8sdgBX3WQxa2IppEsMQetATbwn8POiNO5tuqEeBmuEqF2D00PmCDKpAq');
+        
+    </script>
+{% endblock %}
