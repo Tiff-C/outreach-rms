@@ -16,15 +16,20 @@ class School(models.Model):
     email = models.EmailField("Contact Email", max_length=320, blank=True)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
 class Event(models.Model):
     """ A class to define the events model """
+    name = models.CharField(max_length=254)
     school = models.ForeignKey(School, null=True, on_delete=models.SET_NULL)
     date = models.DateField(auto_now=False, auto_now_add=False)
     start_time = models.TimeField("Event Start Time")
     staff = models.ManyToManyField(User, verbose_name="Staff Attending Event")
 
     def __str__(self):
-        return '%s %s' % (self.school, self.date)
+        name = self.name
+        date = self.date
+        formatted_date = date.strftime('%d/%m/%y')
+
+        return f'{name} - {formatted_date}'
