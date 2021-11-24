@@ -20,7 +20,7 @@
                         <thead>
                             <tr>
                                 <th>Event</th>
-                                <th>Event Date</th>
+                                <th>School</th>
                                 <th>Quick Actions</th>
                             </tr>
                         </thead>
@@ -28,7 +28,7 @@
                             {% for event in events %}
                                 <tr>
                                     <td><a class="link-dark" href="{% url 'event_details' event.id %}">{{ event }}</a></td>
-                                    <td>{{ event.date }}</td>
+                                    <td>{{ event.school }}</td>
                                     <td>
                                         <a href="{% url 'edit_event' event.id %}" class="btn btn-sm teal-bg">
                                             <i class="fas fa-edit"></i>
