@@ -29,4 +29,4 @@ class PaymentForm(forms.Form):
         label="Month", choices=MONTH_CHOICES, required=False)
     expiry_year = forms.ChoiceField(
         label="Year", choices=YEAR_CHOICES, required=False)
-    stripe_id = forms.CharField(widgets=forms.HiddenInput)
+    stripe_id = forms.CharField(widget=forms.HiddenInput)

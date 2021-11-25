@@ -1,7 +1,5 @@
 from django.contrib import admin
-from .models import Product, Order, OrderLineItem
+from .models import Donation
 
 
-admin.site.register(Product)
-admin.site.register(Order)
-admin.site.register(OrderLineItem)
+admin.site.register(Donation)
