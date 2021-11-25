@@ -23,13 +23,27 @@
                 </p>
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <form method="POST" id="donation-form" action="{% url 'donations' %}" class="align-items-center">
+                    {% csrf_token %}
+                    {{ donation_form.as_p }}
+                    {{ payment_form.as_p }}
+                    <div>
+                        <p>
+                            <button type="submit" class="btn teal-bg">Donate</button>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
 {% block postloadjs %}
 {{ block.super }}
     <script type="text/javascript">
-        var stripe = Stripe();
-        
+        Stripe.publishableKey = '{{ publishable }}';
     </script>
+    <script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
 {% endblock %}
