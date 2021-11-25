@@ -1,5 +1,18 @@
 from django import forms
-from .models import Order
+
+
+class DonationForm(forms.Form):
+    """
+    A form class to be used to take donor details and the donation amount
+    """
+    name = forms.CharField(label="Full Name", max_length=70, required=False)
+    email = forms.EmailField(label="Email Address", max_length=320)
+    donation_amount = forms.DecimalField(
+        label="Donation Amount",
+        min_value=0.50,
+        max_value=100.00,
+        required=False
+    )
 
 
 class PaymentForm(forms.Form):
@@ -17,10 +30,3 @@ class PaymentForm(forms.Form):
     expiry_year = forms.ChoiceField(
         label="Year", choices=YEAR_CHOICES, required=False)
     stripe_id = forms.CharField(widgets=forms.HiddenInput)
-
-
-class OrderForm(forms.ModelForm):
-    """ A form class to be used to take donor details """
-    class Meta:
-        model = Order
-        fields = ['name', 'email']
