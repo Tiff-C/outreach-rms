@@ -55,7 +55,8 @@ To ensure acessibility I used the [Material.io](https://material.io/) colour too
 
 To put together the relational database schema from this project I used [Lucidchart]() to help me map out my tables and work out the relationship types between the tables.
 
-A copy of my original database schema can be seen [here](documentation/db-schema.png)
+A copy of my original database schema can be seen below
+![Schema](documentation/db-schema.png)
 
 ### Wireframes
 
@@ -121,6 +122,8 @@ When running this project locally you will need to setup an env.py file, an exam
    os.environ.setdefault("SECRET_KEY", "<SECRET_KEY_HERE>")
    os.environ.setdefault("DEBUG", "FALSE")
    os.environ.setdefault("DATABASE_URL", "<DB_URL_HERE>")
+   os.environ.setdefault("STRIPE_PUBLISHABLE", "<PUBLISHABLE_API_KEY>")
+   os.environ.setdefault("STRIPE_SECRET", "<SECRET_API_KEY>")
    ```
 
 
