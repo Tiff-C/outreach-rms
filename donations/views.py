@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib import messages
 from .forms import DonationForm, PaymentForm
 import stripe
+import json
 
 stripe.api_key = settings.STRIPE_SECRET
 
@@ -15,18 +16,23 @@ def donations(request):
         if donation_form.is_valid() and payment_form.is_valid():
             donation = donation_form.save()
             total = 0
-
             total += donation.amount
 
-            try:
-                customer = stripe.Charge.create(
-                    amount=(total * 100),
-                    currency="GBP",
-                    description=donation.name,
-                    card=payment_form.cleaned_data['stripe_id'],
-                )
-            except stripe.error.CardError:
-                messages.error(request, "Your Card Was Declined")
+            stripe.PaymentIntent.create(
+                amount=total,
+                currency="gbp",
+                payment_method_types=["card"],
+            )
+
+            # try:
+            #     customer = stripe.Charge.create(
+            #         amount=(total * 100),
+            #         currency="GBP",
+            #         description=donation.name,
+            #         card=payment_form.cleaned_data['stripe_id'],
+            #     )
+            # except stripe.error.CardError:
+            #     messages.error(request, "Your Card Was Declined")
 
             if customer.paid:
                 messages.success(
@@ -43,10 +49,11 @@ def donations(request):
     else:
         donation_form = DonationForm()
         payment_form = PaymentForm()
-        context = {
-            'donation_form': donation_form,
-            'payment_form': payment_form,
-            'publishable': settings.STRIPE_PUBLISHABLE
-        }
+
+    context = {
+        'donation_form': donation_form,
+        'payment_form': payment_form,
+        'Publishable': settings.STRIPE_PUBLISHABLE
+    }
 
     return render(request, 'donations/donations.html', context)

@@ -10,7 +10,7 @@ class Donation(models.Model):
         blank=True)
     email = models.EmailField("Email Address", max_length=320, blank=False)
     date = models.DateTimeField(auto_now=False, auto_now_add=True)
-    donation_amount = models.DecimalField(decimal_places=2)
+    donation_amount = models.DecimalField(decimal_places=2, max_digits=6)
 
     def __str__(self):
         return f"{self.name} donated {self.donation_amount}"

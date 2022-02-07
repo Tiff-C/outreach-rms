@@ -169,6 +169,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STRIPE_PUBLISHABLE = os.environ['STRIPE_PUBLISHABLE']
 STRIPE_SECRET = os.environ['STRIPE_SECRET']
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
