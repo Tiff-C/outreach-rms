@@ -36,5 +36,5 @@ thead {
 
 .link-dark {
     color: black;
-    text-decoration: none;
+    text-decoration: underline;
 }
