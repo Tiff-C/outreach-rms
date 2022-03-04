@@ -60,6 +60,32 @@ A copy of my original database schema can be seen below
 
 ### Wireframes
 
+- Home
+  ![Home](documentation/wireframes/home.png)
+
+- Dashboard
+  ![Dashboard](documentation/wireframes/dashboard.png)
+
+- Referrals
+  ![Referrals](documentation/wireframes/referrals.png)
+
+- New Referral
+  ![New Referral](documentation/wireframes/new-referral.png)
+
+- Students
+  ![Students](documentation/wireframes/students.png)
+
+- Courses
+  ![Courses](documentation/wireframes/courses.png)
+
+- Schools
+  ![Schools](documentation/wireframes/schools.png)
+
+- New School
+  ![New School](documentation/wireframes/new-school.png)
+
+- Events
+  ![Events](documentation/wireframes/events.png)
 
 
 
