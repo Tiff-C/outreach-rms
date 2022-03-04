@@ -1,14 +1,22 @@
 # Outreach Referral Management System
 
 ## UX
+___
 
-### Project Goals
+## Project Goals
 This is my fourth Milestone Project and will be based around a real world need. The goal of this project is to build a Referral Management System for the Outreach department of a local college. The RMS will help the college grow its existing Outrach department by efficiently tracking local schools the college works with, events at those schools and the referrals gained from each event. These referrals will then be tracked by the RMS as they progress to become students and eventually alumni, this conversion information and other Key Performance Indicators will be accessible via the Dashboard page. 
 
-### Developer and Business Goals
- 
+## Developer and Business Goals
+To create a custom built DBMS that will allow users to track referrals thoughout their lifecycle in one place. The current system is multiple spreadsheets for each section: events, schools, referrals, students, courses and classes. The main aim will be to increase department productivity by reducing admin time and providing analytical insights via the dashboard such as:
+- Number of referrals made at an event and conversion rates
+- How many referrals were made by each staff member at an event and conversion rates
+- Upcoming events and assigned staff
+- Upcoming classes
+- Which courses are in demand
+- Which courses aren't getting interest
+- Courses that have enough interest to run a class
 
-### User Stories
+## User Stories
 
 ID | User Story | Included in MVP |
 :---: | --- | :---:
@@ -33,11 +41,11 @@ ID | User Story | Included in MVP |
 18 | As a manager I want to see how many referrals staff members have made, how many of these became students and figures for course progressions | Yes
 
 
-### Design Choices
-
+## Design Choices
+___
 When thinking about the design of the app I wanted to make the layout as intuitive as possible. To achieve this I will be using [Font Awesome](https://fontawesome.com/) icons where appropriate in combination with the [Google Fonts]() family [Roboto]()
 
-#### Navigation
+### Navigation
 
 As some of the web app features such as adding a new referral, school, class etc. will be done repeatedly I wanted to make sure it was easy to navigate to the required pages from anywhere on the app. To accomplish this I have used a combination of the following:
    - 'Quick links' on the cards on the home page allow the user to quickly navigate to the required form for the task they wish to complete.
@@ -47,19 +55,19 @@ As some of the web app features such as adding a new referral, school, class etc
    - On the tables used to display the lists of items from the database I havve included a 'Quick Actions' column that contains `edit` and `delete` buttons allowing the user to update or remove information without having to go to the items details page. (The delete button is setup to only be visible to Managers/Senior Staff) This removes the extra step or 'click' in getting the user where they want to go to fall inline with the UI rule of not needing to make more than two clicks to where you want to go.
    - If a user is viewing the details of an item and they notice an error they will be able to edit this (or delete if manager) without having to navigate away from the page by using the `edit` and `delete` buttons on the details page.
 
-#### Color Scheme
+### Color Scheme
 
 To ensure acessibility I used the [Material.io](https://material.io/) colour tool in combination with the Webaim Contrast Checker. My colour scheme can be seen [here](https://material.io/resources/color/#!/?view.left=1&view.right=1&primary.color=006152&secondary.color=f4f4f4) and the contrast checks for the [Primary colour](https://webaim.org/resources/contrastchecker/?fcolor=FFFFFF&bcolor=006152) and [Primary Dark colour](https://webaim.org/resources/contrastchecker/?fcolor=FFFFFF&bcolor=00362A)
 
-#### Database Schema
+### Database Schema
 
 To put together the relational database schema from this project I used [Lucidchart]() to help me map out my tables and work out the relationship types between the tables.
 
 A copy of my original database schema can be seen below
 ![Schema](documentation/db-schema.png)
 
-### Wireframes
-
+## Wireframes
+___
 - Home
   ![Home](documentation/wireframes/home.png)
 
@@ -90,7 +98,7 @@ A copy of my original database schema can be seen below
 
 
 ## Features
-
+___
 ### Existing Features
 
 
@@ -103,11 +111,11 @@ A copy of my original database schema can be seen below
 
 
 ## Testing
-
+___
 To avoid making this README too long I have created a seperate file to document my testing during the creation of the project. 
 
 ## Deployment
-
+___
 This project has been deployed via [Heroku](https://www.heroku.com/). To prepare the app for deployment I created a `requirements.txt` file and a `Procfile`. I did this using the following commands in the terminal:
 
 ```
@@ -121,7 +129,13 @@ When deploying the app on Heroku I used the GitHub deployment method and put the
 
 Once this info had been input into Heroku and the `requirements.txt` file and the `Procfile` have been pushed to GitHub, I then went to deploy > enable automatic deployments and then selected 'deploy branch'.This method of deployment allows the app to update whenever new code is pushed to the GitHub repository.
 
-### Issues During Deployment
+## Issues During Deployment
+
+Issue | Soloution | Screen Shots
+---- | ---- | ---
+Static file not being collected |  Originally I tried to fix the issue by adding `STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),) STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')` to my [settings.py](outreach_rms/settings.py) file as suggested in [Django and Static Assets - Heroku Documentation](https://devcenter.heroku.com/articles/django-assets). Unfortunatley this did not work and I was now getting a MIME type error. To resolve this I tried updating the mimetype using the answer provided Fergal Moran in this [Stack Overflow Post](https://stackoverflow.com/a/16355034). I also tried installing Whitenoise as suggested in [Django and Static Assets - Heroku Documentation](https://devcenter.heroku.com/articles/django-assets) This resolved the issue and the static CSS files were now being loaded. | ![static not loading 1](documentation/screen-shots/static-not-loading-1.png) ![static not loading 2](documentation/screen-shots/static-not-loading-2.png) ![static not loading 3](documentation/screen-shots/static-not-loading-3.png)
+
+I had no other issues during the deployment of my project.
 
 ## How to run This Project Locally
 
@@ -154,7 +168,7 @@ When running this project locally you will need to setup an env.py file, an exam
 
 
 ## Credits
-
+___
 ### Content
 
 
