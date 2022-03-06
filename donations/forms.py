@@ -2,19 +2,28 @@ import calendar
 from datetime import datetime
 from django import forms
 
+from django.forms import ModelForm
+from .models import Donation
 
-class DonationForm(forms.Form):
+
+class DonationForm(forms.ModelForm):
     """
     A form class to be used to take donor details and the donation amount
     """
-    name = forms.CharField(label="Full Name", max_length=70, required=False)
-    email = forms.EmailField(label="Email Address", max_length=320)
-    donation_amount = forms.DecimalField(
-        label="Donation Amount",
-        min_value=0.50,
-        max_value=100.00,
-        required=True
-    )
+
+    class Meta:
+        model = Donation
+        fields = ('name', 'email', 'donation_amount',)
+
+  
+    # name = forms.CharField(label="Full Name", max_length=70, required=False)
+    # email = forms.EmailField(label="Email Address", max_length=320)
+    # donation_amount = forms.DecimalField(
+    #     label="Donation Amount",
+    #     min_value=0.50,
+    #     max_value=100.00,
+    #     required=True
+    # )
 
 
 class PaymentForm(forms.Form):

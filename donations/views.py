@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpR
 from django.conf import settings
 from django.contrib import messages
 from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 import stripe
 from .forms import DonationForm # PaymentForm
 import json
@@ -11,14 +12,30 @@ def donations(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
-    donation_form = DonationForm(request.POST)
+    donation_form = DonationForm()
 
     if request.method == 'POST':
 
+        donation_form = DonationForm(request.POST)
+
         if donation_form.is_valid():
-            donation = donation_form
+            donation = donation_form.save(commit=False)
             total = 0
-            total += donation.amount
+            total += donation.donation_amount
+            donation_form.save()
+
+    template = 'donations/donations.html'
+    context = {
+        'donation_form': donation_form,
+        # 'payment_form': payment_form,
+        'stripe_public_key': stripe_public_key,
+    }
+
+    return render(request, template, context)
+
+def create_payment_intent(request):
+
+    if request.method == 'POST':
         try:
             data = json.loads(request.data)
             # Create a PaymentIntent with the order amount and currency
@@ -29,22 +46,11 @@ def donations(request):
                     'enabled': True,
                 },
             )
-            return jsonify({
+            return JsonResponse({
                 'clientSecret': intent['client_secret']
             })
         except Exception as e:
-            return jsonify(error=str(e)), 403
-    template = 'donations/donations.html'
-    context = {
-        'donation_form': donation_form,
-        # 'payment_form': payment_form,
-        'stripe_public_key': stripe_public_key,
-        'client_secret': intent,
-    }
-
-    return render(request, template, context)
-
-
+            return JsonResponse(error=str(e)), 403
 
 # copied and amended from Boutique Ado walkthrough.
 # (https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/b5e178737596a1a1cf5be50345dc770b119918fd/checkout/views.py)
@@ -106,7 +112,6 @@ def donations(request):
 #         'donation_form': donation_form,
 #         # 'payment_form': payment_form,
 #         'stripe_public_key': stripe_public_key,
-#         'client_secret': stripe_secret_key,
 #     }
 
 #     return render(request, template, context)

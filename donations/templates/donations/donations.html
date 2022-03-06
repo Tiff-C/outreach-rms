@@ -31,20 +31,19 @@
         </div>
         <div class="row">
             <div class="col">
-                <form method="POST" id="donation-form" action="{% url 'donations' %}" class="align-items-center">
+                <form method="POST" id="payment-form" action="{% url 'create_payment_intent' %}" class="align-items-center">
                     {% csrf_token %}
                     {{ donation_form.as_p }}
-                    <form id="payment-form">
-                        <div id="payment-element">
-                          <!--Stripe.js injects the Payment Element-->
-                        </div>
-                        <button id="submit">
-                          <div class="spinner hidden" id="spinner"></div>
-                          <span id="button-text">Pay now</span>
-                        </button>
-                        <div id="payment-message" class="hidden"></div>
-                      </form>
-                    <div>
+                    <div id="payment-element">
+                        <!--Stripe.js injects the Payment Element-->
+                    </div>
+                    <button id="submit">
+                        <div class="spinner hidden" id="spinner"></div>
+                        <span id="button-text">Pay now</span>
+                    </button>
+                    <div id="payment-message" class="hidden"></div>
+                    
+                    <!-- <div>
                         <p>
                             <div class="submit-button text-right mt-5 mb-2">                    
                                 <button id="submit-button" class="btn btn-black rounded-0">
@@ -61,7 +60,7 @@
                                 </p>
                             </div>
                         </p>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>
@@ -72,5 +71,5 @@
     {{ block.super }}
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
     {{ client_secret|json_script:"id_client_secret" }}
-    <script src="{% static 'js/stripe-element.js' %}" defer></script>
+    <script src="{% static 'js/stripe-element.js' %}"></script>
 {% endblock %}
