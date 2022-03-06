@@ -7,6 +7,25 @@ import stripe
 from .forms import DonationForm # PaymentForm
 import json
 
+@require_POST
+def create_payment_intent(request):
+
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.data)
+            # Create a PaymentIntent with the order amount and currency
+            intent = stripe.PaymentIntent.create(
+                amount=total,
+                currency='gbp',
+                automatic_payment_methods={
+                    'enabled': True,
+                },
+            )
+            return JsonResponse({
+                'clientSecret': intent['client_secret']
+            })
+        except Exception as e:
+            return JsonResponse(error=str(e)), 403
 
 def donations(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
@@ -29,28 +48,12 @@ def donations(request):
         'donation_form': donation_form,
         # 'payment_form': payment_form,
         'stripe_public_key': stripe_public_key,
+        'client_secret': intent.client_secret,
     }
 
     return render(request, template, context)
 
-def create_payment_intent(request):
 
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.data)
-            # Create a PaymentIntent with the order amount and currency
-            intent = stripe.PaymentIntent.create(
-                amount=total,
-                currency='gbp',
-                automatic_payment_methods={
-                    'enabled': True,
-                },
-            )
-            return JsonResponse({
-                'clientSecret': intent['client_secret']
-            })
-        except Exception as e:
-            return JsonResponse(error=str(e)), 403
 
 # copied and amended from Boutique Ado walkthrough.
 # (https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/b5e178737596a1a1cf5be50345dc770b119918fd/checkout/views.py)
