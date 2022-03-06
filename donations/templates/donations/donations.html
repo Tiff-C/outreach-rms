@@ -4,7 +4,7 @@
 
 {% block extra_css %}
 {{ block.super }}
-    <script src="{% static 'css/stripe.css' %}"></script>
+    <link src="{% static 'css/stripe.css' %}"></link>
 {% endblock %}
 
 {% block page_header %}
@@ -31,11 +31,11 @@
         </div>
         <div class="row">
             <div class="col">
-                <form method="POST" id="payment-form" action="{% url 'create_payment_intent' %}" class="align-items-center">
+                <form method="POST" id="payment-form" action="{% url 'donations' %}" class="align-items-center">
                     {% csrf_token %}
                     {{ donation_form.as_p }}
-                    <div id="payment-element">
-                        <!--Stripe.js injects the Payment Element-->
+                    <div id="card-element">
+                        <!-- Mount the Payment Element here -->
                     </div>
                     <button id="submit">
                         <div class="spinner hidden" id="spinner"></div>
