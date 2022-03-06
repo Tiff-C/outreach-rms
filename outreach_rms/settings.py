@@ -32,6 +32,9 @@ ALLOWED_HOSTS = [
     'localhost',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+]
 
 # Application definition
 
@@ -45,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+    'corsheaders',
     'home',
     'schools',
     'courses',
@@ -55,6 +59,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -166,8 +171,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STRIPE_PUBLISHABLE = os.environ['STRIPE_PUBLISHABLE']
-STRIPE_SECRET = os.environ['STRIPE_SECRET']
+STRIPE_PUBLIC_KEY = os.environ['STRIPE_PUBLISHABLE']
+STRIPE_SECRET_KEY = os.environ['STRIPE_SECRET']
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 

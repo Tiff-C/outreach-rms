@@ -2,12 +2,9 @@
 
 {% load static %}
 
-{% block extra_js %}
+{% block extra_css %}
 {{ block.super }}
-    <script>
-        Stripe.publishableKey = '{{ Publishable }}';
-    </script>
-    <script src="{% static 'js/stripe.js' %}"></script>
+    <script src="{% static 'css/stripe.css' %}"></script>
 {% endblock %}
 
 {% block page_header %}
@@ -37,14 +34,43 @@
                 <form method="POST" id="donation-form" action="{% url 'donations' %}" class="align-items-center">
                     {% csrf_token %}
                     {{ donation_form.as_p }}
-                    {{ payment_form.as_p }}
+                    <form id="payment-form">
+                        <div id="payment-element">
+                          <!--Stripe.js injects the Payment Element-->
+                        </div>
+                        <button id="submit">
+                          <div class="spinner hidden" id="spinner"></div>
+                          <span id="button-text">Pay now</span>
+                        </button>
+                        <div id="payment-message" class="hidden"></div>
+                      </form>
                     <div>
                         <p>
-                            <button type="submit" class="btn teal-bg">Donate</button>
+                            <div class="submit-button text-right mt-5 mb-2">                    
+                                <button id="submit-button" class="btn btn-black rounded-0">
+                                    <span class="font-weight-bold">Complete Order</span>
+                                    <span class="icon">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                </button>
+                                <p class="small text-danger my-0">
+                                    <span class="icon">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                    </span>
+                                    <span>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></span>
+                                </p>
+                            </div>
                         </p>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'js/stripe-element.js' %}" defer></script>
 {% endblock %}
