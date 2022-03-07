@@ -38,7 +38,6 @@ def donations(request):
     donation_form = DonationForm()
 
     if request.method == 'POST':
-
         form_data = {
             'full_name': request.POST.get('name'),
             'email': request.POST.get('email'),
@@ -62,6 +61,7 @@ def donations(request):
                 Please double check your information.')
             return redirect(reverse('donations'))
     else:
+        print('stripe key:', stripe_public_key)
         total = 1 #  need to replace with a calculation of donation amount
         stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
