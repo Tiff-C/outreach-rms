@@ -33,39 +33,43 @@ def donations(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     donation_form = DonationForm()
-    # payment_form = PaymentForm(request.POST)
 
     if request.method == 'POST':
 
-        form_data = {
-            'full_name': request.POST.get('name', ''),
-            'email': request.POST.get('email', ''),
-            'donation_amount': request.POST.get('donation_amount', ''),
-        }
+        # form_data = {
+        #     'full_name': request.POST.get('name'),
+        #     'email': request.POST.get('email'),
+        #     'donation_amount': request.POST.get('donation_amount'),
+        # }
 
-        donation_form = DonationForm(form_data)
+        # donation_form = DonationForm(form_data)
+        donation_form = DonationForm(request.POST)
+        print(donation_form)
 
         if donation_form.is_valid():
+
             donation = donation_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]
             donation.stripe_pid = pid
             donation.save()
+
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse(
-                'checkout_success', args=[donation.name]
+                'checkout_success', args=[donation]
             ))
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
 
-        order_total = donation.donation_amount
-        stripe.api_key = stripe_secret_key
-        intent = stripe.PaymentIntent.create(
-            amount=order_total,
-            currency='gbp',
-        )
+    total = 1
+    stripe_total = round(total * 100)
+    stripe.api_key = stripe_secret_key
+    intent = stripe.PaymentIntent.create(
+        amount=stripe_total,
+        currency='gbp',
+    )
 
-        print(intent)
+    print(intent)
 
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
@@ -75,7 +79,7 @@ def donations(request):
     context = {
         'donation_form': donation_form,
         'stripe_public_key': stripe_public_key,
-        #  'client_secret': intent.client_secret,
+        'client_secret': intent.client_secret,
     }
 
     return render(request, template, context)
