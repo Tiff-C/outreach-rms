@@ -1,83 +1,12 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.shortcuts import (
+    render, redirect, reverse, get_object_or_404, HttpResponse)
 from django.conf import settings
 from django.contrib import messages
 from django.views.decorators.http import require_POST
-from django.http import JsonResponse
 import stripe
-from .forms import DonationForm # PaymentForm
-import json
-
-# @require_POST
-# def create_payment_intent(request):
-
-#     if request.method == 'POST':
-#         try:
-#             data = json.loads(request.data)
-#             # Create a PaymentIntent with the order amount and currency
-#             intent = stripe.PaymentIntent.create(
-#                 amount=total,
-#                 currency='gbp',
-#                 automatic_payment_methods={
-#                     'enabled': True,
-#                 },
-#             )
-#             return JsonResponse({
-#                 'clientSecret': intent['client_secret']
-#             })
-#         except Exception as e:
-#             return JsonResponse(error=str(e)), 403
-
-# def donations(request):
-#     stripe_public_key = settings.STRIPE_PUBLIC_KEY
-#     stripe_secret_key = settings.STRIPE_SECRET_KEY
-
-#     donation_form = DonationForm()
-
-#     if request.method == 'POST':
-
-#         donation_form = DonationForm(request.POST)
-
-#         if donation_form.is_valid():
-#             donation = donation_form.save(commit=False)
-#             # Code from boutique ado
-#             pid = request.POST.get('client_secret').split('_secret')[0]
-#             donation.stripe_pid = pid
-#             # End of copied code
-#             total = 0
-#             total += donation.donation_amount
-#             donation_form.save()
-#             # Code from boutique ado
-#             request.session['save_info'] = 'save-info' in request.POST
-#             return redirect(reverse(
-#                 'checkout_success', args=[donation.name]
-#             ))
-#         else:
-#             messages.error(request, 'There was an error with your form. \
-#                 Please double check your information.')
-
-#         order_total = total
-#         stripe.api_key = stripe_secret_key
-#         intent = stripe.PaymentIntent.create(
-#             amount=order_total,
-#             currency=settings.STRIPE_CURRENCY,
-#         )
-
-
-#     if not stripe_public_key:
-#         messages.warning(request, 'Stripe public key is missing. \
-#             Did you forget to set it in your environment?')
-#             # End of copied code
-
-#     template = 'donations/donations.html'
-#     context = {
-#         'donation_form': donation_form,
-#         # 'payment_form': payment_form,
-#         'stripe_public_key': stripe_public_key,
-#         'client_secret': intent.client_secret,
-#     }
-
-#     return render(request, template, context)
-
+#  from .models import Donation
+from .forms import DonationForm
+#  import json
 
 
 # copied and amended from Boutique Ado walkthrough.
@@ -91,7 +20,6 @@ def cache_checkout_data(request):
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
             'save_info': request.POST.get('save_info'),
-            'username': request.user,
         })
         return HttpResponse(status=200)
     except Exception as e:
@@ -104,16 +32,24 @@ def donations(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
-    donation_form = DonationForm(request.POST)
+    donation_form = DonationForm()
     # payment_form = PaymentForm(request.POST)
 
     if request.method == 'POST':
 
-        if donation_form.is_valid():
-            donation = donation_form
-            total = 0
-            total += donation.amount
+        form_data = {
+            'full_name': request.POST.get('name', ''),
+            'email': request.POST.get('email', ''),
+            'donation_amount': request.POST.get('donation_amount', ''),
+        }
 
+        donation_form = DonationForm(form_data)
+
+        if donation_form.is_valid():
+            donation = donation_form.save(commit=False)
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            donation.stripe_pid = pid
+            donation.save()
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse(
                 'checkout_success', args=[donation.name]
@@ -122,14 +58,14 @@ def donations(request):
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
 
-        order_total = total
-        stripe_total = round(order_total * 100)
+        order_total = donation.donation_amount
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
-            amount=stripe_total,
-            currency=settings.STRIPE_CURRENCY,
+            amount=order_total,
+            currency='gbp',
         )
 
+        print(intent)
 
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
@@ -138,105 +74,29 @@ def donations(request):
     template = 'donations/donations.html'
     context = {
         'donation_form': donation_form,
-        # 'payment_form': payment_form,
         'stripe_public_key': stripe_public_key,
-        # 'client_secret': intent.client_secret,
+        #  'client_secret': intent.client_secret,
     }
 
     return render(request, template, context)
 
+# still need to update checkout_success
 
-def checkout_success(request, order_number):
-    """
-    Handle successful checkouts
-    """
-    save_info = request.session.get('save_info')
-    order = get_object_or_404(Order, order_number=order_number)
-    messages.success(request, f'Order successfully processed! \
-        Your order number is {order_number}. A confirmation \
-        email will be sent to {order.email}.')
 
-    if 'bag' in request.session:
-        del request.session['bag']
+# def checkout_success(request, order_number):
+#     """
+#     Handle successful checkouts
+#     """
+#     save_info = request.session.get('save_info')
+#     donation = get_object_or_404(
+#         Donation, donation_amount=donation_amount)
+#     messages.success(
+#         request, f'Donation of {donation_amount} successfully processed! \
+#         A confirmation email will be sent to {donation.email}.')
 
-    template = 'checkout/checkout_success.html'
-    context = {
-        'order': order,
-    }
-
-    return render(request, template, context)
-
-# def donations(request):
-#     """ A view to return the donations page """
-#     if request.method == 'POST':
-#         donation_form = DonationForm(request.POST)
-#         payment_form = PaymentForm(request.POST)
-#         if donation_form.is_valid() and payment_form.is_valid():
-#             donation = donation_form.save()
-#             total = 0
-#             total += donation.amount
-
-#             try:
-#                 data = json.loads(request.data)
-#                 # Create a PaymentIntent with the order amount and currency
-#                 intent = stripe.PaymentIntent.create(
-#                     amount=total,
-#                     currency='gbp',
-#                     automatic_payment_methods={
-#                         'enabled': True,
-#                     },
-#                 )
-#                 return jsonify({
-#                     'clientSecret': intent['client_secret']
-#                 })
-#             except Exception as e:
-#                 return jsonify(error=str(e)), 403
-
-#             # customer = stripe.Customer.create(
-#             #                 description="My First Test Customer"
-#             #             )
-
-#             # try:
-#             #     stripe.PaymentIntent.create(
-#             #         customer='customer',
-#             #         currency="gbp",
-#             #         amount=total,
-#             #         payment_method_types=["card"],
-#             #         setup_future_usage="on_session",
-#             #     )
-#             # except stripe.error.CardError:
-#             #     messages.error(request, "Your Card Was Declined")
-
-#             # try:
-#             #     customer = stripe.Charge.create(
-#             #         amount=(total * 100),
-#             #         currency="GBP",
-#             #         description=donation.name,
-#             #         card=payment_form.cleaned_data['stripe_id'],
-#             #     )
-#             # except stripe.error.CardError:
-#             #     messages.error(request, "Your Card Was Declined")
-
-#             if customer.paid:
-#                 messages.success(
-#                     request,
-#                     "You have successfully paid, thank you for your donation."
-#                 )
-#                 return redirect('dontations')
-#             else:
-#                 messages.error(request, "Unable to take payment")
-#         else:
-#             print(payment_form.errors)
-#             messages.error(
-#                 request, "We were unable to take payment with that card")
-#     else:
-#         donation_form = DonationForm()
-#         payment_form = PaymentForm()
-
+#     template = 'donations/donation_success.html'
 #     context = {
-#         'donation_form': donation_form,
-#         'payment_form': payment_form,
-#         'Publishable': settings.STRIPE_PUBLISHABLE
+#         'donation': donation,
 #     }
 
-#     return render(request, 'donations/donations.html', context)
+#     return render(request, template, context)
