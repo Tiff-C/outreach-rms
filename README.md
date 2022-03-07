@@ -166,20 +166,3 @@ When running this project locally you will need to setup an env.py file, an exam
    os.environ.setdefault("STRIPE_PUBLISHABLE", "<PUBLISHABLE_API_KEY>")
    os.environ.setdefault("STRIPE_SECRET", "<SECRET_API_KEY>")
    ```
-
-
-## Credits
-___
-### Content
-
-
-### Media
-
-
-  
-### Code
-
-
-
-### Acknowledgments
-

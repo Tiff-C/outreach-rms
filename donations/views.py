@@ -30,7 +30,8 @@ def cache_checkout_data(request):
 
 def donations(request):
     """
-    A view to render the donation form. If request = POST it will get the form data
+    A view to render the donation form. 
+    If request = POST it will get the form data
     """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
